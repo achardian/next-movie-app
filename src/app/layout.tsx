@@ -2,7 +2,7 @@ import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { ThemeProvider } from "@/components/providers/theme-provider";
-import { Header } from "@/components";
+import { Header, Sidebar } from "@/components";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -25,7 +25,10 @@ export default function RootLayout({
           storageKey='next-movie-theme'
         >
           <Header />
-          {children}
+          <div className='flex h-full relative ml-[200px] mt-16'>
+            <Sidebar />
+            {children}
+          </div>
         </ThemeProvider>
       </body>
     </html>
