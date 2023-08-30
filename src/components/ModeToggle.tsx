@@ -1,18 +1,14 @@
 "use client";
 
+import useMounted from "@/hooks/use-mounted";
 import { useTheme } from "next-themes";
 import Image from "next/image";
-import { useEffect, useState } from "react";
 
 const ModeToggle = () => {
   const { theme, setTheme } = useTheme();
-  const [isMounted, setIsMounted] = useState(false);
+  const { isMounted } = useMounted();
 
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
-
-  console.log(theme);
+  if (!isMounted) return null;
 
   return (
     <div>

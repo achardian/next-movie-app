@@ -36,9 +36,7 @@ const Sidebar = () => {
   return (
     <aside
       className={`lg:w-[200px] ${
-        isOpen
-          ? "-translate-x-[500px] lg:translate-x-0"
-          : "translate-x-0 lg:-translate-x-[500px]"
+        isOpen ? "translate-x-0" : "lg:translate-x-0 -translate-x-[500px]"
       } duration-100 ease-in-out fixed inset-0 bg-gray-50 dark:bg-[#03001C] mt-16 py-5 flex flex-col px-10 z-50`}
     >
       {links.map((link) => (

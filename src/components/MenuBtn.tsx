@@ -3,10 +3,12 @@
 import Image from "next/image";
 import { useTheme } from "next-themes";
 import useSidebarStore from "@/store/sidebar-store";
+import useMounted from "@/hooks/use-mounted";
 
 const MenuBtn = () => {
   const { theme } = useTheme();
   const { setIsOpen, isOpen } = useSidebarStore();
+  const { isMounted } = useMounted();
 
   const handleClick = () => {
     if (isOpen) {
@@ -15,6 +17,8 @@ const MenuBtn = () => {
       setIsOpen(true);
     }
   };
+
+  if (!isMounted) return null;
 
   return (
     <button
