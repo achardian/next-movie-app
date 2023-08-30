@@ -1,5 +1,5 @@
 import { IMovieResult } from "@/types";
-import { IMAGE_BASE_URL } from "@/utils/api";
+import { imageUrl } from "@/utils/api";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -7,7 +7,7 @@ const Banner = ({ moviesData }: { moviesData: IMovieResult }) => {
   return (
     <div className='relative w-full h-[420px] rounded-md overflow-clip'>
       <Image
-        src={IMAGE_BASE_URL + moviesData.backdrop_path}
+        src={imageUrl.original + moviesData.backdrop_path}
         alt={moviesData.title}
         className='object-cover'
         fill

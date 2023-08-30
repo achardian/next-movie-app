@@ -24,6 +24,9 @@ const endpoints = {
     `https://api.themoviedb.org/3/trending/movie/day?api_key=${API_KEY_SERVER}&page=1`,
 };
 
-const IMAGE_BASE_URL = "https://image.tmdb.org/t/p/original";
+const imageUrl = {
+  original: "https://image.tmdb.org/t/p/original",
+  w500: "https://image.tmdb.org/t/p/w500",
+};
 
-export { endpoints, IMAGE_BASE_URL };
+export { endpoints, imageUrl };
