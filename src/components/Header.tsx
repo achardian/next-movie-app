@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Playfair_Display } from "next/font/google";
 
 import { MenuBtn, ModeToggle } from ".";
+import { SearchBtn } from ".";
 
 const font = Playfair_Display({ subsets: ["latin"], weight: "700" });
 
@@ -18,7 +19,10 @@ const Header = () => {
           </h1>
         </Link>
       </div>
-      <ModeToggle />
+      <div className='flex items-center gap-3'>
+        <SearchBtn />
+        <ModeToggle />
+      </div>
     </header>
   );
 };

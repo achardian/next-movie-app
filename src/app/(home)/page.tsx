@@ -1,9 +1,6 @@
 import getTrendingMovies from "@/actions/getTrendingMovies";
 import { Banner, Card } from "@/components";
 import { MovieApiResponse } from "@/types";
-import { imageUrl } from "@/utils/api";
-import Image from "next/image";
-import Link from "next/link";
 
 const Home = async () => {
   const responseData: MovieApiResponse = await getTrendingMovies();

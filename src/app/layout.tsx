@@ -4,6 +4,7 @@ import { Inter } from "next/font/google";
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import { Header, Sidebar } from "@/components";
 import SidebarProvider from "@/components/providers/sidebar-provider";
+import SearchModal from "@/components/modals/SearchModal";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -27,6 +28,7 @@ export default function RootLayout({
         >
           <Header />
           <SidebarProvider>{children}</SidebarProvider>
+          <SearchModal />
         </ThemeProvider>
       </body>
     </html>
