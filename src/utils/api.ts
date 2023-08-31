@@ -25,6 +25,8 @@ const endpoints = {
     `https://api.themoviedb.org/3/trending/movie/day?api_key=${API_KEY_SERVER}&page=1`,
   searchMovies: (keyword: string, page: number = 1) =>
     `https://api.themoviedb.org/3/search/movie?query=${keyword}&api_key=${API_KEY_CLIENT}&page=${page}`,
+  searchTv: (keyword: string, page: number = 1) =>
+    `https://api.themoviedb.org/3/search/tv?query=${keyword}&api_key=${API_KEY_CLIENT}&page=${page}`,
 };
 
 const imageUrl = {

@@ -6,6 +6,7 @@ import Card from "./Card";
 import MenuBtn from "./MenuBtn";
 import SearchBtn from "./SearchBtn";
 import SearchInput from "./SearchInput";
+import SearchResult from "./SearchResult";
 
 export {
   Header,
@@ -16,4 +17,5 @@ export {
   MenuBtn,
   SearchBtn,
   SearchInput,
+  SearchResult,
 };

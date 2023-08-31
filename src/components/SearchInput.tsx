@@ -1,51 +1,66 @@
 "use client";
 
 import getMoviesByKeyword from "@/actions/getMoviesByKeyword";
-import useMounted from "@/hooks/use-mounted";
-import useSearchModalStore from "@/store/search-modal-store";
-import { IMovieResult, MovieApiResponse } from "@/types";
-import { imageUrl } from "@/utils/api";
-import Image from "next/image";
-import Link from "next/link";
+
+import {
+  IMovieResult,
+  ITvResult,
+  MovieApiResponse,
+  TvApiResponse,
+} from "@/types";
 import { useEffect, useRef, useState } from "react";
 import { useDebounce } from "use-debounce";
 import Loader from "./Loader";
+import { SearchResult } from ".";
+import getTvByKeyword from "@/actions/getTvByKeyword";
 
 const SearchInput = () => {
   const [searchVariant, setSearchVariant] = useState("Movie");
 
   const inputRef = useRef<HTMLInputElement>(null);
   const [keyword, setKeyword] = useState("");
-  const [results, setResults] = useState<IMovieResult[] | []>([]);
+  const [movieResults, setMovieResults] = useState<IMovieResult[] | []>([]);
+  const [tvResults, setTvResults] = useState<ITvResult[] | []>([]);
   const [isMounted, setIsMounted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [value] = useDebounce(keyword, 1500);
+  const [value] = useDebounce(keyword, 1000);
 
   useEffect(() => {
     setIsMounted(true);
     const getMovies = async (value: string) => {
-      if (value) {
+      if (value && searchVariant === "Movie") {
         try {
           setIsLoading(true);
           const moviesData: MovieApiResponse = await getMoviesByKeyword(value);
-          setResults(moviesData.results);
+          setTvResults([]);
+          setMovieResults(moviesData.results);
+        } catch (error) {
+          console.log(error);
+        } finally {
+          setIsLoading(false);
+        }
+      } else if (value && searchVariant === "Tv") {
+        try {
+          setIsLoading(true);
+          const tvData: TvApiResponse = await getTvByKeyword(value);
+          setMovieResults([]);
+          setTvResults(tvData.results);
         } catch (error) {
           console.log(error);
         } finally {
           setIsLoading(false);
         }
       } else {
-        setResults([]);
+        setMovieResults([]);
+        setTvResults([]);
         setIsLoading(false);
       }
     };
 
     getMovies(value);
-  }, [value]);
+  }, [value, searchVariant]);
 
   if (!isMounted) return null;
-
-  console.log(results, value);
 
   return (
     <form
@@ -89,29 +104,39 @@ const SearchInput = () => {
 
       <div className='max-h-[400px] overflow-y-auto flex flex-col gap-2 mt-3'>
         {isLoading && <Loader />}
-        {results?.map((result) => (
-          <div
+        {value &&
+          !isLoading &&
+          movieResults.length === 0 &&
+          searchVariant === "Movie" && (
+            <h2 className='text-lg font-semibold text-red-600 text-center'>
+              {value} is not found!
+            </h2>
+          )}
+        {value &&
+          !isLoading &&
+          tvResults.length === 0 &&
+          searchVariant === "Tv" && (
+            <h2 className='text-lg font-semibold text-red-600 text-center'>
+              {value} is not found!
+            </h2>
+          )}
+        {movieResults?.map((result) => (
+          <SearchResult
             key={result.id}
-            className='dark:bg-gray-950 bg-white p-2 flex gap-3'
-          >
-            <div className='relative w-16 h-24'>
-              <Image
-                src={imageUrl.w500 + result.poster_path}
-                alt={result.title}
-                fill
-              />
-            </div>
-            <Link
-              href={`/movie/${result.id}`}
-              className='flex flex-col justify-center gap-3 flex-1'
-            >
-              <h3>{result.title}</h3>
-              <div className='flex gap-3 items-center'>
-                <Image src='/star.png' width={20} height={20} alt='star' />
-                {Math.round(result.vote_average)}/10
-              </div>
-            </Link>
-          </div>
+            title={result.title}
+            poster={result.poster_path}
+            id={result.id}
+            vote={result.vote_average}
+          />
+        ))}
+        {tvResults?.map((result) => (
+          <SearchResult
+            key={result.id}
+            title={result.name}
+            poster={result.poster_path}
+            id={result.id}
+            vote={result.vote_average}
+          />
         ))}
       </div>
     </form>

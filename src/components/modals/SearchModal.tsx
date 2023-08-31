@@ -15,7 +15,7 @@ const SearchModal = () => {
   return (
     <div
       onClick={closeModal}
-      className={`fixed inset-0 z-[100] bg-gray-600/70 dark:bg-black/70 items-center justify-center ${
+      className={`fixed inset-0 z-[100] py-5 bg-gray-600/70 dark:bg-black/70 items-center justify-center ${
         isOpen ? "flex" : "hidden"
       }`}
     >
