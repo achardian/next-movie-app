@@ -1,6 +1,7 @@
 const BASE_MOVIE_URL = "https://api.themoviedb.org/3/movie";
 const BASE_TV_URL = "https://api.themoviedb.org/3/tv";
 const API_KEY_SERVER = process.env.NEXT_MOVIE_API_KEY;
+const API_KEY_CLIENT = process.env.NEXT_PUBLIC_MOVIE_API_KEY;
 
 const endpointBuilder = (
   BASE_URL: string,
@@ -22,6 +23,8 @@ const endpoints = {
   },
   trendingMovies: () =>
     `https://api.themoviedb.org/3/trending/movie/day?api_key=${API_KEY_SERVER}&page=1`,
+  searchMovies: (keyword: string, page: number = 1) =>
+    `https://api.themoviedb.org/3/search/movie?query=${keyword}&api_key=${API_KEY_CLIENT}&page=${page}`,
 };
 
 const imageUrl = {

@@ -8,6 +8,15 @@ body,
   height: 100%;
 }
 
+::-webkit-scrollbar {
+  width: 10px;
+  background-color: red;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #333;
+}
+
 @layer components {
   .toggle-btn {
     @apply rounded-md bg-gray-200 dark:bg-gray-950 p-3;
