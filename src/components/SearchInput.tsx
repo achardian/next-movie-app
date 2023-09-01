@@ -136,6 +136,7 @@ const SearchInput = () => {
             poster={result.poster_path}
             id={result.id}
             vote={result.vote_average}
+            tv
           />
         ))}
       </div>

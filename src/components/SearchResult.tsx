@@ -9,9 +9,10 @@ type SearchResultProps = {
   poster: string;
   title: string;
   vote: number;
+  tv?: boolean;
 };
 
-const SearchResult = ({ id, poster, title, vote }: SearchResultProps) => {
+const SearchResult = ({ id, poster, title, vote, tv }: SearchResultProps) => {
   const { setIsOpen } = useSearchModalStore();
 
   return (
@@ -20,7 +21,7 @@ const SearchResult = ({ id, poster, title, vote }: SearchResultProps) => {
         <Image src={imageUrl.w500 + poster} alt={title} fill />
       </div>
       <Link
-        href={`/movie/${id}`}
+        href={`/${tv ? "tv" : "movie"}/${id}`}
         onClick={() => setIsOpen(false)}
         className='flex flex-col justify-center gap-3 flex-1'
       >

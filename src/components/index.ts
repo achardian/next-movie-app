@@ -7,6 +7,7 @@ import MenuBtn from "./MenuBtn";
 import SearchBtn from "./SearchBtn";
 import SearchInput from "./SearchInput";
 import SearchResult from "./SearchResult";
+import Detail from "./Detail";
 
 export {
   Header,
@@ -18,4 +19,5 @@ export {
   SearchBtn,
   SearchInput,
   SearchResult,
+  Detail,
 };

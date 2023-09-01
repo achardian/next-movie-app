@@ -28,6 +28,9 @@ const endpoints = {
   movieById: (id: string) => {
     return endpointBuilder(BASE_MOVIE_URL, API_KEY_SERVER as string, id);
   },
+  tvById: (id: string) => {
+    return endpointBuilder(BASE_TV_URL, API_KEY_SERVER as string, id);
+  },
   searchMovies: (keyword: string, page: number = 1) =>
     `https://api.themoviedb.org/3/search/movie?query=${keyword}&api_key=${API_KEY_CLIENT}&page=${page}`,
   searchTv: (keyword: string, page: number = 1) =>
