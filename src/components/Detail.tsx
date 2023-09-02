@@ -20,7 +20,7 @@ type DetailProps = {
 const Detail = ({ ...props }: DetailProps) => {
   const director = props.crew.find((person) => person.job === "Director");
 
-  const cast = props.cast.length > 6 ? props.cast.slice(0, 6) : props.cast;
+  const cast = props.cast.length > 5 ? props.cast.slice(0, 6) : props.cast;
 
   return (
     <div className='w-full p-2'>

@@ -1,5 +1,5 @@
 import getMoviesByFilter from "@/actions/getMoviesByFilter";
-import { Banner, Card, FilterBtn } from "@/components";
+import { Banner, Card, FilterBtn, PaginationControl } from "@/components";
 import { MovieApiResponse } from "@/types";
 
 const MoviePage = async ({
@@ -32,6 +32,7 @@ const MoviePage = async ({
           />
         ))}
       </div>
+      <PaginationControl totalPages={result.total_pages} />
     </div>
   );
 };
