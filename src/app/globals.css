@@ -21,4 +21,8 @@ body,
   .toggle-btn {
     @apply rounded-md bg-gray-200 dark:bg-gray-950 p-3;
   }
+
+  .filter-link-btn {
+    @apply py-2 px-3 rounded-sm;
+  }
 }

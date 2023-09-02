@@ -15,11 +15,11 @@ const endpointBuilder = (
 };
 
 const endpoints = {
-  popularMovies: (page: number = 1) => {
+  moviesByFilter: (filter: string, page: number = 1) => {
     return endpointBuilder(
       BASE_MOVIE_URL,
       API_KEY_SERVER as string,
-      "popular",
+      filter,
       page
     );
   },

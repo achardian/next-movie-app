@@ -14,7 +14,7 @@ const Sidebar = () => {
     },
     {
       name: "Movie",
-      path: "/movie",
+      path: "/movie?filter=now_playing&page=1",
     },
     {
       name: "Tv",
@@ -30,6 +30,8 @@ const Sidebar = () => {
     },
   ];
 
+  console.log("/movie?filter=now_playing".split("?")[0]);
+
   const { isOpen } = useSidebarStore();
   const user = false;
 
@@ -44,7 +46,8 @@ const Sidebar = () => {
           href={link.path}
           key={link.path}
           className={`${
-            pathname === link.path
+            pathname ===
+            `${link.path.includes("?") ? link.path.split("?")[0] : link.path}`
               ? "font-semibold bg-gray-300 dark:bg-gray-800"
               : ""
           } py-2 px-3 rounded-md`}

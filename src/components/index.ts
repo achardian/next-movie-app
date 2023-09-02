@@ -8,6 +8,7 @@ import SearchBtn from "./SearchBtn";
 import SearchInput from "./SearchInput";
 import SearchResult from "./SearchResult";
 import Detail from "./Detail";
+import FilterBtn from "./FilterBtn";
 
 export {
   Header,
@@ -20,4 +21,5 @@ export {
   SearchInput,
   SearchResult,
   Detail,
+  FilterBtn,
 };
