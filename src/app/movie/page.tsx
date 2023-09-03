@@ -20,8 +20,13 @@ const MoviePage = async ({
   return (
     <div className='px-3 w-full'>
       <FilterBtn />
-      <Banner moviesData={bannerData} />
-      <div className='grid grid-cols-2 lg:grid-cols-4 gap-3 mt-5'>
+      <Banner
+        id={bannerData.id}
+        title={bannerData.title}
+        overview={bannerData.overview}
+        backdrop_path={bannerData.backdrop_path}
+      />
+      <div className='grid grid-cols-2 lg:grid-cols-4 gap-5 mt-5'>
         {movies.map((movie) => (
           <Card
             key={movie.id}

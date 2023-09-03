@@ -12,7 +12,12 @@ const Home = async () => {
 
   return (
     <div className='w-full p-3'>
-      <Banner moviesData={trendingMovie} />
+      <Banner
+        id={trendingMovie.id}
+        title={trendingMovie.title}
+        overview={trendingMovie.overview}
+        backdrop_path={trendingMovie.backdrop_path}
+      />
       <div className='w-full grid grid-cols-2 lg:grid-cols-4 py-5 gap-8'>
         {trendingMovies.map((movie) => (
           <Card

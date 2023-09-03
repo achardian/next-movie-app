@@ -7,9 +7,10 @@ type CardProps = {
   poster_path: string;
   title: string;
   vote: number;
+  tv?: boolean;
 };
 
-const Card = ({ id, poster_path, title, vote }: CardProps) => {
+const Card = ({ id, poster_path, title, vote, tv }: CardProps) => {
   return (
     <div className='relative w-full h-80 rounded-lg overflow-clip group'>
       <Image
@@ -19,7 +20,7 @@ const Card = ({ id, poster_path, title, vote }: CardProps) => {
         fill
       />
       <Link
-        href={`/movie/${id}`}
+        href={`/${tv ? "tv" : "movie"}/${id}`}
         className='absolute inset-0 p-3 hidden group-hover:flex flex-col justify-end bg-gradient-to-t from-black to-black/20'
       >
         <div className='flex items-center gap-3 mb-3'>

@@ -2,20 +2,27 @@
 
 import { useRouter, useSearchParams } from "next/navigation";
 
-const PaginationControl = ({ totalPages }: { totalPages: number }) => {
+const PaginationControl = ({
+  totalPages,
+  tv,
+}: {
+  totalPages: number;
+  tv?: boolean;
+}) => {
   const searchParams = useSearchParams();
   const router = useRouter();
   const page = searchParams.get("page");
   const filter = searchParams.get("filter");
+  const isTv = tv ? "tv" : "movie";
 
   const handlePrevPage = () => {
-    router.push(`/movie?filter=${filter}&page=${Number(page) - 1}`);
     router.refresh();
+    router.push(`/${isTv}?filter=${filter}&page=${Number(page) - 1}`);
   };
 
   const handleNextPage = () => {
-    router.push(`/movie?filter=${filter}&page=${Number(page) + 1}`);
     router.refresh();
+    router.push(`/${isTv}?filter=${filter}&page=${Number(page) + 1}`);
   };
 
   return (

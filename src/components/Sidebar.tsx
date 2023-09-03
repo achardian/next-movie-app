@@ -18,7 +18,7 @@ const Sidebar = () => {
     },
     {
       name: "Tv",
-      path: "/tv",
+      path: "/tv?filter=airing_today&page=1",
     },
     {
       name: "Favorites",

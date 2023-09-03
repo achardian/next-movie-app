@@ -23,6 +23,14 @@ const endpoints = {
       page
     );
   },
+  tvByFilter: (filter: string, page: number = 1) => {
+    return endpointBuilder(
+      BASE_TV_URL as string,
+      API_KEY_SERVER as string,
+      filter,
+      page
+    );
+  },
   trendingMovies: () =>
     `https://api.themoviedb.org/3/trending/movie/day?api_key=${API_KEY_SERVER}&page=1`,
   movieById: (id: string) => {
