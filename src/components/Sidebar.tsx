@@ -1,8 +1,11 @@
 "use client";
 
+import useAuthModal from "@/store/auth-modal-store";
 import useSidebarStore from "@/store/sidebar-store";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useSession } from "next-auth/react";
+import Image from "next/image";
 
 const Sidebar = () => {
   const pathname = usePathname();
@@ -33,7 +36,8 @@ const Sidebar = () => {
   console.log("/movie?filter=now_playing".split("?")[0]);
 
   const { isOpen } = useSidebarStore();
-  const user = false;
+  const { setIsOpen } = useAuthModal();
+  const { data: session } = useSession();
 
   return (
     <aside
@@ -56,10 +60,24 @@ const Sidebar = () => {
         </Link>
       ))}
       <div className='mt-auto'>
-        {user ? (
-          <img src='' alt='' />
+        {session?.user ? (
+          <div className='flex items-center gap-3'>
+            <Image
+              src={session.user.image || ""}
+              alt={session.user.name as string}
+              width={30}
+              height={30}
+              className='rounded-full'
+            />
+            <button className='w-full py-2 px-2 bg-red-600 text-white rounded-md text-sm'>
+              Sign Out
+            </button>
+          </div>
         ) : (
-          <button className='w-full py-2 bg-red-600 text-white rounded-md'>
+          <button
+            onClick={() => setIsOpen(true)}
+            className='w-full py-2 bg-red-600 text-white rounded-md'
+          >
             Sign In
           </button>
         )}

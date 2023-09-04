@@ -2,9 +2,11 @@ import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { ThemeProvider } from "@/components/providers/theme-provider";
-import { Header, Sidebar } from "@/components";
+import { Header } from "@/components";
 import SidebarProvider from "@/components/providers/sidebar-provider";
 import SearchModal from "@/components/modals/SearchModal";
+import AuthModal from "@/components/modals/AuthModal";
+import AuthProvider from "@/components/providers/AuthProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,15 +23,18 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <body className={`${inter.className} bg-white dark:bg-[#352F44]`}>
-        <ThemeProvider
-          attribute='class'
-          enableSystem={false}
-          storageKey='next-movie-theme'
-        >
-          <Header />
-          <SidebarProvider>{children}</SidebarProvider>
-          <SearchModal />
-        </ThemeProvider>
+        <AuthProvider>
+          <ThemeProvider
+            attribute='class'
+            enableSystem={false}
+            storageKey='next-movie-theme'
+          >
+            <Header />
+            <SidebarProvider>{children}</SidebarProvider>
+            <SearchModal />
+            <AuthModal />
+          </ThemeProvider>
+        </AuthProvider>
       </body>
     </html>
   );
