@@ -73,7 +73,7 @@ model Movie {
 model Tv {
     id  String  @id @default(auto()) @map("_id") @db.ObjectId
     title String @db.String
-    movieId String
+    tvId String
     poster String
     vote Int
     favorite Boolean?

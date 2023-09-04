@@ -29,4 +29,8 @@ body,
   .pagination-btn {
     @apply bg-red-600 disabled:bg-red-400 py-2 px-5 rounded-md text-white;
   }
+
+  .primary-btn {
+    @apply py-2 px-5 bg-red-600 hover:bg-red-500 text-white rounded-full;
+  }
 }

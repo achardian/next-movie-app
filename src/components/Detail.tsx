@@ -1,6 +1,8 @@
 import { IMovieCast, IMovieCrew } from "@/types";
 import { imageUrl } from "@/utils/api";
+
 import Image from "next/image";
+import { DetailButton } from ".";
 
 type DetailProps = {
   id: number;
@@ -15,6 +17,7 @@ type DetailProps = {
   cast: IMovieCast[];
   crew: IMovieCrew[];
   vote: number;
+  isTv?: boolean;
 };
 
 const Detail = ({ ...props }: DetailProps) => {
@@ -48,7 +51,7 @@ const Detail = ({ ...props }: DetailProps) => {
       </div>
 
       <div className='flex flex-col lg:flex-row pb-5 mt-10'>
-        <div className='flex-[1.5] lg:border-r-2 border-gray-300 px-3 py-2 rounded-md bg-gradient-to-r from-gray-400/20 to-gray-50/0'>
+        <div className='flex-[1.5] lg:border-r-2 border-gray-300 px-3 py-5 rounded-md bg-gradient-to-r from-gray-400/20 to-gray-50/0'>
           <div className=''>
             <h2 className='font-semibold'>Overview</h2>
             <p>{props.overview}</p>
@@ -58,7 +61,7 @@ const Detail = ({ ...props }: DetailProps) => {
             <p>{props.genres.map((genre) => genre.name).join(" / ")}</p>
           </div>
         </div>
-        <div className='flex-1 lg:border-l-2 border-gray-300 px-3 py-2 rounded-md bg-gradient-to-l from-gray-400/20 to-gray-50/0'>
+        <div className='flex-1 lg:border-l-2 border-gray-300 px-3 py-5 rounded-md bg-gradient-to-l from-gray-400/20 to-gray-50/0'>
           <div className='gap-2 flex pb-6'>
             <h2 className='font-semibold'>Release Date:</h2>
             <p>{props.release_date}</p>
@@ -71,6 +74,13 @@ const Detail = ({ ...props }: DetailProps) => {
             <Image src='/star.png' width={23} height={23} alt='star' />
             {Math.round(props.vote)}/10
           </div>
+          <DetailButton
+            id={props.id.toString()}
+            title={props.title}
+            poster={props.poster}
+            vote={props.vote}
+            isTv={props.isTv as boolean}
+          />
         </div>
       </div>
 

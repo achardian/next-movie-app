@@ -4,7 +4,7 @@ import useAuthModal from "@/store/auth-modal-store";
 import useSidebarStore from "@/store/sidebar-store";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 
 const Sidebar = () => {
@@ -69,7 +69,10 @@ const Sidebar = () => {
               height={30}
               className='rounded-full'
             />
-            <button className='w-full py-2 px-2 bg-red-600 text-white rounded-md text-sm'>
+            <button
+              onClick={() => signOut()}
+              className='w-full py-2 px-2 bg-red-600 text-white rounded-md text-sm'
+            >
               Sign Out
             </button>
           </div>

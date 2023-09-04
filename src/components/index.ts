@@ -10,6 +10,7 @@ import SearchResult from "./SearchResult";
 import Detail from "./Detail";
 import FilterBtn from "./FilterBtn";
 import PaginationControl from "./PaginationControl";
+import DetailButton from "./DetailButton";
 
 export {
   Header,
@@ -24,4 +25,5 @@ export {
   Detail,
   FilterBtn,
   PaginationControl,
+  DetailButton,
 };

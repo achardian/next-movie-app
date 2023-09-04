@@ -7,6 +7,7 @@ import SidebarProvider from "@/components/providers/sidebar-provider";
 import SearchModal from "@/components/modals/SearchModal";
 import AuthModal from "@/components/modals/AuthModal";
 import AuthProvider from "@/components/providers/AuthProvider";
+import ToasterProvider from "@/components/providers/ToasterProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -33,6 +34,7 @@ export default function RootLayout({
             <SidebarProvider>{children}</SidebarProvider>
             <SearchModal />
             <AuthModal />
+            <ToasterProvider />
           </ThemeProvider>
         </AuthProvider>
       </body>
