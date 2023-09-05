@@ -36,6 +36,7 @@ const TvDetail = async ({ params }: Props) => {
       cast={tvData.credits.cast}
       crew={tvData.credits.crew}
       vote={tvData.vote_average}
+      isTv={true}
     />
   );
 };
