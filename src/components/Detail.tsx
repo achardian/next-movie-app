@@ -89,7 +89,7 @@ const Detail = ({ ...props }: DetailProps) => {
         <div className='flex flex-wrap gap-3'>
           {cast.map((person) => (
             <div key={person.id}>
-              <div className='relative w-[140px] h-[200px]'>
+              <div className='relative w-[143px] h-[200px]'>
                 <Image
                   src={imageUrl.w500 + person.profile_path}
                   alt={person.name}
@@ -97,7 +97,7 @@ const Detail = ({ ...props }: DetailProps) => {
                   fill
                 />
               </div>
-              <h2 className='text-center'>{person.original_name}</h2>
+              <h2 className='text-center text-sm'>{person.original_name}</h2>
             </div>
           ))}
         </div>

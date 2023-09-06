@@ -1,24 +1,24 @@
-import prismadb from "@/lib/prismadb";
-import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
+import { getServerSession } from "next-auth/next";
+import prismadb from "@/lib/prismadb";
 import { authOptions } from "../auth/[...nextauth]/route";
 
 export const POST = async (req: Request) => {
   const { id, title, poster, vote, userId, isTv } = await req.json();
 
   try {
-    if (isTv === true) {
+    if (isTv) {
       const tv = await prismadb.tv.findFirst({
         where: {
-          tvId: id,
           userId,
-          favorite: true,
+          tvId: id,
+          watchlist: true,
         },
       });
 
       if (tv)
         return NextResponse.json(
-          "Cannot added, It is already in your favorites!",
+          "Cannot added, It is already in your watchlist",
           { status: 200 }
         );
 
@@ -28,26 +28,26 @@ export const POST = async (req: Request) => {
           title,
           poster,
           vote,
-          favorite: true,
+          watchlist: true,
           userId,
         },
       });
 
-      return NextResponse.json("Successfully added into your favorites!", {
+      return NextResponse.json("Successfully added into your watchlist!", {
         status: 201,
       });
     } else {
       const movie = await prismadb.movie.findFirst({
         where: {
-          movieId: id,
           userId,
-          favorite: true,
+          movieId: id,
+          watchlist: true,
         },
       });
 
       if (movie)
         return NextResponse.json(
-          "Cannot added, It is already in your favorites!",
+          "Cannot added, It is already in your watchlist",
           { status: 200 }
         );
 
@@ -57,17 +57,17 @@ export const POST = async (req: Request) => {
           title,
           poster,
           vote,
-          favorite: true,
+          watchlist: true,
           userId,
         },
       });
 
-      return NextResponse.json("Successfully added into your favorites!", {
+      return NextResponse.json("Successfully added into your watchlist!", {
         status: 201,
       });
     }
   } catch (error) {
-    return NextResponse.json("Error, failed to add this to your favorites!", {
+    return NextResponse.json("Error, failed to add this to your watchlist!", {
       status: 500,
     });
   }
@@ -76,17 +76,18 @@ export const POST = async (req: Request) => {
 export const GET = async (req: Request) => {
   try {
     const session = await getServerSession(authOptions);
+
     const movieData = prismadb.movie.findMany({
       where: {
         userId: session?.user.id,
-        favorite: true,
+        watchlist: true,
       },
     });
 
     const tvData = prismadb.tv.findMany({
       where: {
         userId: session?.user.id,
-        favorite: true,
+        watchlist: true,
       },
     });
 

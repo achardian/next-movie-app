@@ -29,7 +29,7 @@ const Sidebar = () => {
     },
     {
       name: "Watchlist",
-      path: "/Watchlist",
+      path: "/watchlist",
     },
   ];
 

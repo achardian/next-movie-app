@@ -1,7 +1,7 @@
 "use client";
 
 import { useSession } from "next-auth/react";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import toast from "react-hot-toast";
 
 type DetailButtonProps = {
@@ -15,31 +15,47 @@ type DetailButtonProps = {
 const DetailButton = ({ id, title, poster, vote, isTv }: DetailButtonProps) => {
   const { data: session } = useSession();
 
+  const postData = {
+    id: id,
+    title: title,
+    poster: poster,
+    vote: vote,
+    userId: session?.user.id,
+    isTv,
+  };
+
   const addToFavorites = async () => {
     try {
-      const { data } = await axios.post("/api/favorites", {
-        id: id,
-        title: title,
-        poster: poster,
-        vote: vote,
-        favorite: true,
-        userId: session?.user.id,
-        isTv,
-      });
+      const { data } = await axios.post("/api/favorites", { ...postData });
 
-      console.log(data);
       toast.success(data, { duration: 3000 });
     } catch (error) {
-      console.log(error);
+      const err = error as AxiosError;
+      toast.error(err.response?.data as string, { duration: 3000 });
     }
   };
+
+  const addToWatchlist = async () => {
+    try {
+      const { data } = await axios.post("/api/watchlist", { ...postData });
+
+      toast.success(data, { duration: 3000 });
+    } catch (error) {
+      const err = error as AxiosError;
+      toast.error(err.response?.data as string, { duration: 3000 });
+    }
+  };
+
+  if (!session?.user) return null;
 
   return (
     <div className='flex gap-3 mt-6'>
       <button onClick={addToFavorites} className='primary-btn'>
         Add to Favorites
       </button>
-      <button className='primary-btn'>Add to Watchlist</button>
+      <button onClick={addToWatchlist} className='primary-btn'>
+        Add to Watchlist
+      </button>
     </div>
   );
 };
