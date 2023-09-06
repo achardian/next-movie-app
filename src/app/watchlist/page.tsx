@@ -3,6 +3,7 @@ import { authOptions } from "../api/auth/[...nextauth]/route";
 import getWatchlist from "@/actions/getWatchlist";
 import { Movie, Tv } from "@prisma/client";
 import { Card } from "@/components";
+import RemoveBtn from "@/components/RemoveBtn";
 
 const Watchlist = async () => {
   const session = await getServerSession(authOptions);
@@ -27,13 +28,15 @@ const Watchlist = async () => {
             <h1 className='text-xl'>Movies</h1>
             <div className='grid grid-cols-2 lg:grid-cols-4 gap-5'>
               {movies.map((movie) => (
-                <Card
-                  key={movie.id}
-                  id={parseInt(movie.movieId)}
-                  poster_path={movie.poster}
-                  title={movie.title}
-                  vote={movie.vote}
-                />
+                <div key={movie.id} className='w-full'>
+                  <Card
+                    id={parseInt(movie.movieId)}
+                    poster_path={movie.poster}
+                    title={movie.title}
+                    vote={movie.vote}
+                  />
+                  <RemoveBtn id={movie.id} isWatchlist isTv={false} />
+                </div>
               ))}
             </div>
           </div>
@@ -43,14 +46,17 @@ const Watchlist = async () => {
             <h1 className='text-xl'>Tv</h1>
             <div className='grid grid-cols-2 lg:grid-cols-4 gap-5'>
               {tv.map((items) => (
-                <Card
-                  key={items.id}
-                  id={Number(items.tvId)}
-                  poster_path={items.poster}
-                  title={items.title}
-                  vote={items.vote}
-                  tv={true}
-                />
+                <div className='w-full'>
+                  <Card
+                    key={items.id}
+                    id={Number(items.tvId)}
+                    poster_path={items.poster}
+                    title={items.title}
+                    vote={items.vote}
+                    tv={true}
+                  />
+                  <RemoveBtn id={items.id} isWatchlist isTv />
+                </div>
               ))}
             </div>
           </div>

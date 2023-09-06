@@ -3,6 +3,7 @@
 import { useSession } from "next-auth/react";
 import axios, { AxiosError } from "axios";
 import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 type DetailButtonProps = {
   id: string;
@@ -14,6 +15,7 @@ type DetailButtonProps = {
 
 const DetailButton = ({ id, title, poster, vote, isTv }: DetailButtonProps) => {
   const { data: session } = useSession();
+  const router = useRouter();
 
   const postData = {
     id: id,
@@ -29,6 +31,7 @@ const DetailButton = ({ id, title, poster, vote, isTv }: DetailButtonProps) => {
       const { data } = await axios.post("/api/favorites", { ...postData });
 
       toast.success(data, { duration: 3000 });
+      router.refresh();
     } catch (error) {
       const err = error as AxiosError;
       toast.error(err.response?.data as string, { duration: 3000 });
@@ -40,6 +43,7 @@ const DetailButton = ({ id, title, poster, vote, isTv }: DetailButtonProps) => {
       const { data } = await axios.post("/api/watchlist", { ...postData });
 
       toast.success(data, { duration: 3000 });
+      router.refresh();
     } catch (error) {
       const err = error as AxiosError;
       toast.error(err.response?.data as string, { duration: 3000 });

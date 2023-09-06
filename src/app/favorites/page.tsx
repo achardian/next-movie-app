@@ -3,6 +3,7 @@ import { Card } from "@/components";
 import { Movie, Tv } from "@prisma/client";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]/route";
+import RemoveBtn from "@/components/RemoveBtn";
 
 const Favorites = async () => {
   const session = await getServerSession(authOptions);
@@ -27,13 +28,15 @@ const Favorites = async () => {
             <h1 className='text-xl'>Movies</h1>
             <div className='grid grid-cols-2 lg:grid-cols-4 gap-5'>
               {movies.map((movie) => (
-                <Card
-                  key={movie.id}
-                  id={parseInt(movie.movieId)}
-                  poster_path={movie.poster}
-                  title={movie.title}
-                  vote={movie.vote}
-                />
+                <div key={movie.id} className='w-full'>
+                  <Card
+                    id={parseInt(movie.movieId)}
+                    poster_path={movie.poster}
+                    title={movie.title}
+                    vote={movie.vote}
+                  />
+                  <RemoveBtn id={movie.id} isFavorite isTv={false} />
+                </div>
               ))}
             </div>
           </div>
@@ -43,14 +46,16 @@ const Favorites = async () => {
             <h1 className='text-xl'>Tv</h1>
             <div className='grid grid-cols-2 lg:grid-cols-4 gap-5'>
               {tv.map((items) => (
-                <Card
-                  key={items.id}
-                  id={Number(items.tvId)}
-                  poster_path={items.poster}
-                  title={items.title}
-                  vote={items.vote}
-                  tv={true}
-                />
+                <div key={items.id} className='w-full'>
+                  <Card
+                    id={Number(items.tvId)}
+                    poster_path={items.poster}
+                    title={items.title}
+                    vote={items.vote}
+                    tv={true}
+                  />
+                  <RemoveBtn id={items.id} isFavorite isTv />
+                </div>
               ))}
             </div>
           </div>

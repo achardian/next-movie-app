@@ -98,3 +98,26 @@ export const GET = async (req: Request) => {
     return NextResponse.json("Something went wrong!", { status: 500 });
   }
 };
+
+export const DELETE = async (req: Request) => {
+  const { id, isTv } = await req.json();
+
+  try {
+    if (isTv) {
+      await prismadb.tv.delete({
+        where: {
+          id,
+        },
+      });
+    } else {
+      await prismadb.movie.delete({
+        where: {
+          id,
+        },
+      });
+    }
+    return NextResponse.json("Delete Successful!", { status: 200 });
+  } catch (error) {
+    return NextResponse.json("Delete failed!", { status: 500 });
+  }
+};
