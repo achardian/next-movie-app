@@ -1,7 +1,7 @@
 import { headers } from "next/headers";
 
 const getWatchlist = async () => {
-  const res = await fetch(`${process.env.NEXT_URL}/api/watchlist`, {
+  const res = await fetch(`/api/watchlist`, {
     method: "GET",
     headers: headers(),
     cache: "no-cache",
