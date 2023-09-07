@@ -1,7 +1,7 @@
 import { headers } from "next/headers";
 
 const getFavorites = async () => {
-  const res = await fetch(`${process.env.NEXT_URL}/api/favorites`, {
+  const res = await fetch(`/api/favorites`, {
     method: "GET",
     headers: headers(),
     cache: "no-cache",
