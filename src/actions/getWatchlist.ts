@@ -1,9 +1,10 @@
 import { headers } from "next/headers";
 
 const getWatchlist = async () => {
-  const res = await fetch(`/api/watchlist`, {
+  const host = headers().get('host')
+  const protocol = process.env.NODE_ENV === "development" ? "http" : "https";
+  const res = await fetch(`${protocol}://${host}/api/watchlist`, {
     method: "GET",
-    headers: headers(),
     cache: "no-cache",
   });
 
