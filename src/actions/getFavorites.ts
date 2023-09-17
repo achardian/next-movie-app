@@ -1,9 +1,10 @@
 import { headers } from "next/headers";
 
 const getFavorites = async () => {
-  const res = await fetch(`/api/favorites`, {
+  const host = headers().get("host");
+  const protocol = process.env.NODE_ENV === "development" ? "http" : "https";
+  const res = await fetch(`${protocol}://${host}/api/favorites`, {
     method: "GET",
-    headers: headers(),
     cache: "no-cache",
   });
 
